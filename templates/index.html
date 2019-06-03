@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+<head>
+    <title>UNC Bioinformatics Dataset Service</title>
+</head>
+
+<body>
+    <h2>Available Datasets</h2>
+    <table border=1>
+        {%for key, value in res.iteritems()%}
+        <tr>
+            <th> {{key}} </th>
+            <td> {{value}} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>

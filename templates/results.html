@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+    <title>UNC Bioinformatics Dataset Service</title>
+</head>
+
+<body>
+    <h2>Results</h2>
+    <table border=1>
+        <tr>
+            <th>Genome</th>
+            <td>Function</td>
+            <td>Date</td>
+            <td>args</td>
+            <td>kwargs</td>
+            <td>Status</td>
+            <td>Result</td>
+        </tr>
+        {%for r in vals%}
+        <tr>
+            <td> {{r["data"]["name"]}} </td>
+            <td> {{ func_call }}</td>
+            <td> {{ r['date'] }}</td>
+            <td> {{r["args"]}} </td>
+            <td> {{r["kwargs"]}} </td>
+            <td> {{r['status'] }}</td>
+            <td> {{r['result'] }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>

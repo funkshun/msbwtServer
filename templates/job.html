@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+    <title>UNC Bioinformatics Dataset Service</title>
+</head>
+
+<body>
+    <h2>Results will be available at /results/{{ token }}</h2>
+    <table border=1>
+        <tr>
+            <th>Genome</th>
+            <td>Function</td>
+            <td>args</td>
+            <td>kwargs</td>
+            <td>Status</td>
+        </tr>
+        {%for r in res%}
+        <tr>
+            <th> {{r["data"]["name"]}} </th>
+            <th> {{ func_call }}</th>
+            <td> {{r["args"]}} </td>
+            <td> {{r["kwargs"]}} </td>
+            {% if r["status"] == 200 %}
+                <td>ACCEPTED</td>
+            {% else %}
+                <td>REJECTED</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
