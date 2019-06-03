@@ -99,7 +99,7 @@ def create_app(test_config=None):
     return app
 
 def checkHosts():
-        ROOT = os.path.realpath(os.path.dirname(__file__))
+        ROOT = os.path.realpath(os.path.dirname(__file__))1
         try:
             with open(os.path.join(ROOT, 'hosts'), 'r') as f:
                 host_lst = f.read()
