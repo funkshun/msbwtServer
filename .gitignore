@@ -6,3 +6,5 @@ venv
 env/
 instance/
 .vscode/
+hosts
+msbwtServer/config.py

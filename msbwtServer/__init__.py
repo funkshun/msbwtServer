@@ -22,21 +22,19 @@ def create_app(test_config=None):
         DATABASE = os.path.join(app.instance_path, 'msbwt.sqlite'),
     )
 
-    if test_config is None:
-        app.config.from_pyfile('config.py', silent=True)
-    else:
-        app.config.from_mapping(test_config)
+    app.config.from_object('config')
     
     try:
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    scheduler = BackgroundScheduler()
-    job = scheduler.add_job(checkHosts, 'interval', minutes=5)
-    alive, bwts = checkHosts()
-    jobs = {}
 
-    app.config['db'] = db_ops.create_db('msbwt.sqlite')
+    scheduler = BackgroundScheduler()
+    alive, bwts = checkHosts()
+    job = scheduler.add_job(checkHosts, 'interval', minutes=5)
+    
+    jobs = {}
+    
 
 
     @app.route('/')
