@@ -30,8 +30,8 @@ def create_app(test_config=None):
         pass
 
     scheduler = BackgroundScheduler()
-    alive, bwts = checkHosts()
-    job = scheduler.add_job(checkHosts, 'interval', minutes=5)
+    alive, bwts = _checkHosts()
+    job = scheduler.add_job(_checkHosts, 'interval', minutes=5)
     
     jobs = {}
     
@@ -91,15 +91,9 @@ def create_app(test_config=None):
         return render_template('job.html', func_call=func_call, res=rets, ar=args, token = loc_tok)
     #return r.json()
 
-    
-
-
-    return app
-
-def checkHosts():
-        ROOT = os.path.realpath(os.path.dirname(__file__))1
+    def _checkHosts():
         try:
-            with open(os.path.join(ROOT, 'hosts'), 'r') as f:
+            with open(os.path.join(app.config['HOST_ROOT']), 'r') as f:
                 host_lst = f.read()
             hosts = [x.strip() for x in host_lst.split("\n")]
             #print(hosts)
@@ -127,6 +121,12 @@ def checkHosts():
             except:
                 pass
         return (alive, bwts)
+
+    
+
+
+    return app
+
 
 def makeRequest(name, func, args, maps):
     target = maps[name]

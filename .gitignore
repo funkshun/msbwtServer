@@ -8,3 +8,6 @@ instance/
 .vscode/
 hosts
 msbwtServer/config.py
+build/
+dist/
+msbwtServer.egg-info/
