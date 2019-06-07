@@ -89,14 +89,15 @@ def create_app(test_config=None):
         jobs[loc_tok] = rets
 
         return render_template('job.html', func_call=func_call, res=rets, ar=args, token = loc_tok)
-    #return r.json()
+    
+
 
     def _checkHosts():
         try:
             with open(os.path.join(app.config['HOST_ROOT']), 'r') as f:
                 host_lst = f.read()
             hosts = [x.strip() for x in host_lst.split("\n")]
-            #print(hosts)
+            
         except Exception as e:
             print("Error opening hosts file. Ensure file exists and is populated")
             print(e)
@@ -108,14 +109,13 @@ def create_app(test_config=None):
             try:
                 r = requests.get('http://' + h + '/checkAlive')
                 j = r.json()
-                # #print(j)
-                # if(j['alive']):
+                
                 if r.status_code == 200:
-                    #print(j)
+                    
                     alive[h] = j
                 
                 for key in alive.keys():
-                    #bwts[alive[key]['name']] = msb.loadBWTCloud('http://' + key)
+                   
                     bwts[alive[key]['name']] = 'http://' + key
 
             except:
